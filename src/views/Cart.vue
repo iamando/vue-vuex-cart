@@ -1,0 +1,50 @@
+<template>
+  <div class="flex justify-center my-6">
+    <div
+      class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5"
+    >
+      <div class="flex-1">
+        <table class="w-full text-sm lg:text-base" cellspacing="0">
+          <thead>
+            <tr class="h-12 uppercase">
+              <th class="hidden md:table-cell"></th>
+              <th class="text-left">Product</th>
+              <th class="lg:text-right text-left pl-5 lg:pl-0">
+                <span class="lg:hidden" title="Quantity">Qtd</span>
+                <span class="hidden lg:inline">Quantity</span>
+              </th>
+              <th class="hidden text-right md:table-cell">Unit price</th>
+              <th class="text-right">Total price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <CartItem
+              v-for="product in products"
+              :key="product.id"
+              :product="product"
+            />
+          </tbody>
+        </table>
+        <hr class="pb-6 mt-6" />
+        <CheckoutCard />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import CartItem from "../components/CartItem";
+import CheckoutCard from "../components/CheckoutCard";
+
+export default {
+  components: {
+    CartItem,
+    CheckoutCard,
+  },
+  computed: {
+    products() {
+      return this.$store.getters.cartItems;
+    },
+  },
+};
+</script>
